@@ -1,0 +1,53 @@
+<h3>Remember Why You Started...</h3>
+
+<div>
+    <input type="file" (change)="onFileChanged($event)">
+
+    <img [src]="imgURL" height="200" *ngIf="imgURL">
+</div>
+
+<input type="button" (click)="onUpload()" value="upload">
+
+<hr />
+
+<!-- Received Image:
+
+{{ receivedImageData['pic'] | json}}
+<img [src]="convertedImage" > -->
+
+<!-- app.component.html.txt
+Displaying app.component.html.txt. -->
+
+<!-- <div class="main-container">
+    <div class="nav-container" style="background-color: rgba(0, 0, 0, 0.623);">
+        <div style="text-align: center;">
+            <a class="navbar-brand" style="color: white;">Title</a>
+        </div>
+        <div style="padding-bottom: 5px;">
+            <button class="product-button" type="button" routerLink="products">Menu</button>
+        </div>
+    </div>
+<ngb-carousel class="carousel-container"
+        [showNavigationArrows]="true" 
+        [showNavigationIndicators]="true"
+        interval="2500"
+        [keyboard]="true"
+        [pauseOnHover]="true"
+        [wrap]="true"
+        [activeId]="'sliderOne'">
+
+        <ng-template ngbSlide id="sliderOne">
+            <div class="picsum-img-wrapper">
+                <figure>
+                    <img src="assets/2.jpg" alt="" >
+                    <figcaption>
+                        <h2></h2>
+                        <p></p>
+                    </figcaption>
+                </figure>
+            </div>
+        </ng-template>
+
+</ngb-carousel>
+
+</div> -->

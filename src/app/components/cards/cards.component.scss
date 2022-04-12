@@ -1,0 +1,92 @@
+.container {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.no_goals {
+  text-align:center;
+  font-size: 2.5em;
+  
+}
+.no_goals h1 {
+  font-size: 1em;
+  // padding: 50px;
+  
+}
+.no_goals p {
+  padding: 25px;
+}
+
+#fixed_icon2 {
+  height:100px;
+  width:100px;
+  font-size:50px;
+  cursor:pointer;
+  position: absolute;
+  bottom: 5px;
+  left: 20px;
+  clear:right;
+}
+
+#fixed_icon1 {
+  height:100px;
+  width:100px;
+  font-size:50px;
+  cursor:pointer;
+  position: absolute;
+  bottom: 105px;
+  left: 20px;
+}
+
+.skipper {
+  float:left;
+  color:rgba(150,21,29);
+  width: 250px;
+  height: 250px;
+}
+
+#goal {
+  font-size:100px;
+  cursor:pointer;
+  display:inline;
+}
+
+.example-card {
+    display: inline-grid;
+    width: 250px;
+    margin: 15px;
+    color: rgb(150,21,29);
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .goals {
+    padding: 10%;
+  }
+
+  .red-star {
+    float:right;
+    color:red;
+    font-size:50px;
+  }
+
+  .inner_card {
+    display:inline;
+    width:50%;
+    float:left;
+    text-align:center;
+  }
+  
+  #dollar_goal {
+    font-size: 1.5em;
+    font-weight:bold;
+  }
+
+  #date_goal {
+    font-size: 1.5em;
+    font-weight:bold;
+  }

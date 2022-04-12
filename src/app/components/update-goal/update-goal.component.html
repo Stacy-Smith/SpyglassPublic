@@ -1,0 +1,118 @@
+<div class="container">
+  <div *ngIf="!submitted">
+    <div>
+      <mat-card>
+        <h2>Update your goal!</h2>
+      </mat-card>
+    </div>
+    <form (ngSubmit)="update()" #goalForm="ngForm" validate>
+      <mat-card>
+        <mat-progress-bar *ngIf="display" mode="indeterminate"></mat-progress-bar>
+        <mat-form-field appearance="standard">
+          <mat-label>Goal Name</mat-label>
+          <input matInput placeholder="Ex. 'New Car'" name="goal.title" [(ngModel)]="goal.title" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Ex. 'Saving for a new car'" name="goal.description" [(ngModel)]="goal.description">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Goal Amount</mat-label>
+          <input pattern="^\d+(?:,\d{3})*(?:\.\d{2})?$"
+          title="Must contain only numbers" matInput placeholder="Enter a dollar amount" name="goal.targetAmount" [(ngModel)]="goal.targetAmount" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Total Deposited</mat-label>
+          <input pattern="^\d+(?:,\d{3})*(?:\.\d{2})?$"
+          title="Must contain only numbers" matInput placeholder="Enter an initial deposit" name="goal.currentAmount" [(ngModel)]="goal.currentAmount">
+        </mat-form-field>
+
+        <mat-tab-group (selectedTabChange)="tabClick()">
+          <mat-tab label="By $ Amount">
+
+            <mat-form-field appearance="standard"
+              matTooltip="Enter a dollar amount that you want to put towards this goal each month"
+              matTooltipPosition="left" matTooltipShowDelay="1000">
+              <mat-label>Your Monthly Deposit Amount</mat-label>
+              <input pattern="^\d+(?:,\d{3})*(?:\.\d{2})?$"
+              title="Must contain only numbers" matInput placeholder="Enter a dollar amount" name="goal.userContribution" [(ngModel)]="goal.userContribution">
+            </mat-form-field>
+
+            <mat-form-field appearance="standard"
+              matTooltip="Enter a dollar amount that your partner wants to put towards this goal each month"
+              matTooltipPosition="left" matTooltipShowDelay="1000">
+              <mat-label>Your Partner's Monthly Deposit Amount</mat-label>
+              <input pattern="^\d+(?:,\d{3})*(?:\.\d{2})?$"
+              title="Must contain only numbers" matInput placeholder="Enter a dollar amount" name="goal.secondContribution" [(ngModel)]="goal.secondContribution">
+            </mat-form-field>
+
+            <button type="button" mat-button color="primary" (click)="calculateDate()">Calculate Target Date</button>
+
+          </mat-tab>
+          <mat-tab label="By Date">
+
+            <mat-form-field appearance="standard"
+              matTooltip="Choose a date and we'll tell you how much you need to deposit each month to reach your goal by that date"
+              matTooltipPosition="left" matTooltipShowDelay="1000">
+              <mat-label>Target Date</mat-label>
+              <!-- <input matInput type="month" [(ngModel)]="goal.targetDate"> -->
+              <input matInput [matDatepicker]="picker" [min]="minDate" name="goal.targetDate" [(ngModel)]="goal.targetDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <button type="button" mat-button color="primary" (click)="calculateMonthly()">Calculate Monthly Amount</button>
+          </mat-tab>
+
+        </mat-tab-group>
+
+        <!-- Display appropriate card according to method chosen to calculate goals -->
+        <mat-card *ngIf="setByMonthlyDeposit">
+          <p>You'll reach your goal by:</p>
+          <h3 style="text-align:center;">{{goal.targetDate | datepipe}}</h3>
+        </mat-card>
+
+        <mat-card *ngIf="setByTargetDate">
+          <p>To reach your goal, you'll need to deposit each month:</p>
+          <h3 style="text-align:center;">{{totalByDate | currency}}</h3>
+          <mat-form-field appearance="standard"
+            matTooltip="Enter a dollar amount that you want to put towards this goal each month"
+            matTooltipPosition="left" matTooltipShowDelay="1000">
+            <mat-label>Your Monthly Deposit Amount</mat-label>
+            <input pattern="^\d+(?:,\d{3})*(?:\.\d{2})?$"
+            title="Must contain only numbers" matInput placeholder="Enter a dollar amount" name="goal.userContribution" [(ngModel)]="goal.userContribution">
+          </mat-form-field>
+
+          <mat-form-field appearance="standard"
+            matTooltip="Enter a dollar amount that your partner wants to put towards this goal each month"
+            matTooltipPosition="left" matTooltipShowDelay="1000">
+            <mat-label>Your Partner's Monthly Deposit Amount</mat-label>
+            <input pattern="^\d+(?:,\d{3})*(?:\.\d{2})?$"
+             matInput placeholder="Enter a dollar amount" name="goal.secondContribution" [(ngModel)]="goal.secondContribution">
+          </mat-form-field>
+        </mat-card>
+      </mat-card>
+      <mat-card>
+        <button type="submit" mat-button color="primary" [disabled]="!goalForm.form.valid" (click)="display = !display">
+          <mat-icon>check</mat-icon>Save
+        </button>
+        <button type="button" mat-button color="primary" (click)="clear()">
+          <mat-icon>cancel</mat-icon>Clear
+        </button>
+        <button type="button" mat-button color="primary" routerLink="/home">
+          <mat-icon>arrow_back</mat-icon>Cancel
+        </button>
+      </mat-card>
+    </form>
+  </div>
+  <div *ngIf="submitted">
+    <mat-card>
+      <h2>Your goal has been updated!</h2>
+      <button mat-button color="primary" routerLink="/add-goal">Add A New Goal</button>
+      <button mat-button color="primary" routerLink="/home">Home</button>
+    </mat-card>
+  </div>
+</div>

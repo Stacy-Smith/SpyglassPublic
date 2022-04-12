@@ -1,0 +1,58 @@
+<div *ngIf="!submitted">
+  <div>
+    <mat-card>
+      <h3>Profile Information</h3>
+    </mat-card>
+  </div>
+  <!-- <form (ngSubmit)="update()" #userUpdateForm="ngForm" validate> -->
+ 
+    <mat-card>
+ 
+      <mat-form-field appearance="standard">
+        <mat-label>Enter Your Full Name</mat-label>
+        <input matInput placeholder="Name" [(ngModel)]="user.name" name="user.name" required>
+      </mat-form-field>
+ 
+      <mat-form-field appearance="standard">
+        <mat-label>Primary Email Address</mat-label>
+        <input matInput placeholder="Email Address" [(ngModel)]="user.email" name="user_email"
+         required title="an email is required">
+      </mat-form-field>
+ 
+      <mat-form-field appearance="standard">
+        <mat-label>Second User's Name</mat-label>
+        <input matInput placeholder="" [(ngModel)]="user.secondUser" name="user.seconduser">
+        <mat-hint>Add another user to this account</mat-hint>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <label>Change Your Password</label>
+      <mat-form-field appearance="standard">
+        <mat-label>Enter Current Password</mat-label>
+        <input type="password" matInput placeholder="Password" name="password">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter New Password</mat-label>
+        <input type="password" matInput placeholder="Password" name="new_password">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Re-enter New Password</mat-label>
+        <input type="password" matInput placeholder="Password" name="confirm_password">
+      </mat-form-field>
+ 
+      <button mat-button color="primary" (click)="update()">
+        <mat-icon>check</mat-icon>Save
+      </button>
+      <button type="button" mat-button color="primary" routerLink="/home">
+        <mat-icon>cancel</mat-icon>Cancel
+      </button>
+ 
+    </mat-card>
+  <!-- </form> -->
+</div>
+<div *ngIf="submitted">
+  <mat-card>
+    <h2>Your Profile Has Been Updated</h2>
+    <button mat-button color="primary" (click)="reload()">Home</button>
+  </mat-card>
+</div>

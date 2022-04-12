@@ -1,0 +1,58 @@
+<mat-sidenav-container class="app-sidenav-container">
+    <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10"
+        mode="over">
+        <mat-toolbar color="primary" style="background-color:rgba(150,21,29,1)">
+        <div class="greeting">
+            <div>
+                Welcome, &nbsp;
+            </div>
+            <div>
+                {{user.name}}
+            </div>
+            
+            <div *ngIf='!(user.secondUser== "")'>& {{user.secondUser}}</div>
+            <mat-icon id="back" (click)="sidenav.toggle()">arrow_back</mat-icon>
+        </div>
+          </mat-toolbar>
+       <mat-nav-list>
+        <mat-list-item>
+            <a matLine routerLink="/home" (click)="sidenav.toggle()">
+                Home</a>
+        </mat-list-item>
+           <mat-list-item>
+               <a matLine routerLink='/add-goal' (click)="sidenav.toggle()">
+                   New Goal</a>
+           </mat-list-item>
+        <mat-list-item>
+            <!--PLACEHOLDER FOR TESTING-->
+         <a matLine routerLink='/update-user/1' (click)="sidenav.toggle()">
+             Update Profile</a>
+     </mat-list-item>
+     <mat-list-item>
+        <!--PLACEHOLDER FOR TESTING-->
+     <a matLine routerLink='/upload-image' (click)="sidenav.toggle()">
+         Upload Image</a>
+ </mat-list-item>
+ <mat-list-item>
+    <!--PLACEHOLDER FOR TESTING-->
+ <a matLine routerLink='/login' (click)="sidenav.toggle()">
+     Log Out</a>
+</mat-list-item>
+     <mat-list-item style="position:absolute;bottom:0;right:0;">
+         <a matLine routerLink="/about" (click)="sidenav.toggle()">
+        Geting Started</a>
+     </mat-list-item>
+       </mat-nav-list>
+    </mat-sidenav>
+    
+    <div class="app-sidenav-content">
+        <div class="toolbar">
+            <button mat-button (click)="sidenav.toggle()"><mat-icon>reorder</mat-icon></button>
+            <p routerLink="/home">Spyglass</p>
+            <img src="../../../assets/SailorAndTelescope3.svg" alt="sailor and telescope" width="50px" height="50px" routerLink="/home">
+        </div>
+        <div class="wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+  </mat-sidenav-container>

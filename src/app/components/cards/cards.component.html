@@ -1,0 +1,54 @@
+<div class="container" style="position:relative;">
+    <mat-card class="example-card" *ngFor="let goal of goals"
+        [style.background-color]="goal.progress >= 100 ? 'gold' : 'rgba(255,255,255,.75)'"
+        matTooltip="{{goal.description}}">
+
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{goal.title}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="{{ goal.picture }}">
+        <mat-card-content>
+            <mat-progress-bar mode="determinate" value="{{goal.progress}}"></mat-progress-bar>
+            <span>{{goal.currentAmount | currency}}</span><span style="float:right;">{{goal.targetAmount |
+                currency}}</span><br>
+            <div class="goals">
+                <div class="inner_card">
+                    <p id="dollar_goal">{{goal.userContribution + goal.secondContribution | currency }}</p>
+                    <p>per month</p>
+                </div>
+                <div class="inner_card">
+                    <p id="date_goal">{{goal.targetDate | datepipe }}</p>
+                    <p>Target Date</p>
+                </div>
+                <br>
+            </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button routerLink="/update-goal/{{goal.goalId}}">Edit</button>
+            <span *ngIf="goal.progress >= 100" class="red-star">
+                <mat-icon [inline]="true">star</mat-icon>
+            </span>
+            <button mat-button (click)="delete(goal.goalId)">Delete</button>
+        </mat-card-actions>
+    </mat-card>
+    <div class="no_goals" *ngIf="!goals">
+        <div style="height:250px;float:left;">
+            <img class="skipper" src="../../../assets/SailorAndTelescope3.svg" alt="sailor and telescope">
+        </div>
+        <div style="height:250px;float:left;">
+            <h1 style="clear:right;">Hmm..The Skipper's not seeing any goals...</h1>
+            <!-- <h1>Looks like you haven't set any goals yet</h1> -->
+            <!-- <p>Why not start right now?</p> -->
+            <mat-icon id="goal" routerLink="/add-goal" style="clear:left;">note_add</mat-icon>
+            <p>Add A Goal!</p>
+        </div>
+    </div>
+</div>
+<footer style="position:fixed;bottom:0;left:0; width:100%;">
+    <mat-icon id="fixed_icon1" matTooltip="Add a new goal!" matTooltipShowDelay="1000" routerLink="/add-goal">note_add
+    </mat-icon>
+    <mat-icon id="fixed_icon2" matTooltip="Delete ALL of your goals and start fresh" matTooltipShowDelay="1000"
+        (click)="deleteAll()">delete_forever</mat-icon>
+</footer>
